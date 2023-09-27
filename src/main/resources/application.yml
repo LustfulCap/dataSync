@@ -1,0 +1,45 @@
+server:
+  port: 9999
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///redis_test?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
+    username: root
+    password: 2000426
+
+  rabbitmq:
+    host: 110.188.28.252
+    port: 5672
+    username: test
+    password: 2000426
+    virtual-host: /test
+    #这个配置是保证提供者确保消息推送到交换机中，不管成不成功，都会回调
+    publisher-confirm-type: correlated
+    #保证交换机能把消息推送到队列中
+    publisher-returns: true
+    #这个配置是保证消费者会消费消息，手动确认
+    listener:
+      simple:
+        acknowledge-mode: manual
+#    template:
+#      mandatory: true
+
+  #data:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 2000426
+    database: 0
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+canal:
+  server: 127.0.0.1:11111
+  destination: example
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
